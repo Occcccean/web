@@ -7,7 +7,7 @@ import java.util.UUID;
 import java.io.Serializable;
 import java.util.Date;
 
-public class account implements Serializable {
+public class Account implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
