@@ -32,10 +32,10 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-         <groupId>org.bouncycastle</groupId>
-         <artifactId>bcprov-jdk18on</artifactId>
-         <version>1.77</version>
-       </dependency>
+      <groupId>org.bouncycastle</groupId>
+      <artifactId>bcprov-jdk18on</artifactId>
+      <version>1.77</version>
+    </dependency>
     <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
