@@ -1,0 +1,74 @@
+account:
+  id
+  username
+  password
+  role
+  failed_times
+  lock_time
+  last_password_change_date
+
+role可能是以下字段:
+  student
+  mentor -- 只能查看自己的研究生
+
+  -- 只能查看和管理本学院研究生, 需要审核
+  secretary
+  collage_leader (学院领导)
+
+  -- 能查看和管理全校研究生
+  student_manager  (研究生院管理员)
+  student_leader   (研究生院领导)
+  university_leader    (学校领导)
+
+  -- 设置用户的权限
+  system_manager
+
+  -- 查看日志
+  auditor_manager
+
+  null
+
+student:
+  id
+  name
+  gender
+  nation
+  birth_date
+  birth_place
+  id_number
+  country
+  home_address
+  phone_number
+  email
+  dorm_id
+
+  grade
+  collage
+  major
+  campus
+  entrance_date
+  class
+
+  wechat
+  qq
+  home_phone_number
+  home_contact_man
+
+mentor:
+  id
+  name
+  collage
+
+secretary:
+  id
+  name
+  collage
+
+collage_leader:
+  id
+  name
+  collage
+
+leader:
+  id
+  name
