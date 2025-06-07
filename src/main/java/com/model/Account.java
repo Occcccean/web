@@ -1,9 +1,6 @@
 package com.model;
 
-import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import java.security.MessageDigest;
-import java.security.Security;
-import java.util.UUID;
+import com.util.SM3Util;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,11 +19,11 @@ public class Account implements Serializable {
     // ===================== 密码加密/解密访问器 =====================
 
     public String getPassword() {
-        return SM3Util.sm3(encryptedPassword);
+        return SM3Util.encrypt(encryptedPassword);
     }
 
     public void setPassword(String password) {
-        this.encryptedPassword = SM3Util.sm3(password);
+        this.encryptedPassword = SM3Util.encrypt(password);
     }
 
     // ===================== 其他字段访问器 =====================
@@ -89,25 +86,3 @@ public class Account implements Serializable {
 
 }
 
-class SM3Util {
-    static {
-        Security.addProvider(new BouncyCastleProvider());
-    }
-
-    public static String sm3(String data) {
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SM3", "BC");
-            byte[] hashBytes = digest.digest(data.getBytes());
-            StringBuilder hexString = new StringBuilder();
-            for (byte b : hashBytes) {
-                String hex = Integer.toHexString(0xff & b);
-                if (hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-}
