@@ -1,88 +1,151 @@
 package com.dao;
 
+import com.model.Mentor;
+import java.sql.*;
 import java.util.ArrayList;
 
-import com.model.Mentor;
-
 public class MentorDao extends BaseDao {
+
+  // 添加导师（修复SQL和参数顺序）
   public boolean add(Mentor mentor) {
-    var sql = "Insert into mentor values(?,?,?)";
-    try {
-      var statement = getConnection().prepareStatement(sql);
-      statement.setString(1, mentor.getName());
-      statement.setString(2, mentor.getCollege());
-      statement.setLong(3, mentor.getAccount_id());
-      statement.executeUpdate();
-      return true;
+    String sql = "INSERT INTO mentor (name, collage, account_id) VALUES (?, ?, ?)";
+    try (Connection conn = getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, mentor.getName());
+      pstmt.setString(2, mentor.getCollege());
+      pstmt.setLong(3, mentor.getAccount_id());
+
+      int rows = pstmt.executeUpdate();
+      return rows > 0;
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
   }
 
+  // 根据ID获取导师（修复字段映射和结果集处理）
   public Mentor getById(long id) {
-    var mentor = new Mentor();
-    var sql = "Select name, college, account_id from mentor where id = ?";
-    try {
-      var statement = getConnection().prepareStatement(sql);
-      statement.setLong(1, id);
-      var result = statement.executeQuery();
-      mentor.setId(id);
-      mentor.setName(result.getString("name"));
-      mentor.setCollege(result.getString("name"));
-      mentor.setAccount_id(result.getLong("account_id"));
+    String sql = "SELECT * FROM mentor WHERE id = ?";
+    try (Connection conn = getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setLong(1, id);
+      try (ResultSet rs = pstmt.executeQuery()) {
+        if (rs.next()) {
+          Mentor mentor = new Mentor();
+          mentor.setId(rs.getLong("id"));
+          mentor.setName(rs.getString("name"));
+          mentor.setCollege(rs.getString("collage"));
+          mentor.setAccount_id(rs.getLong("account_id"));
+          return mentor;
+        }
+      }
     } catch (Exception e) {
       e.printStackTrace();
-      return null;
     }
-    return mentor;
+    return null;
   }
 
+  // 更新导师（修复返回值问题）
   public boolean update(Mentor mentor) {
-    var sql = "Update mentor set name=?, college=?, account_id=? where id = ?";
-    try {
-      var statement = getConnection().prepareStatement(sql);
-      statement.setString(1, mentor.getName());
-      statement.setString(2, mentor.getCollege());
-      statement.setLong(3, mentor.getAccount_id());
-      statement.setLong(4, mentor.getId());
-      statement.executeUpdate();
+    String sql = "UPDATE mentor SET name=?, collage=?, account_id=? WHERE id=?";
+    try (Connection conn = getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, mentor.getName());
+      pstmt.setString(2, mentor.getCollege());
+      pstmt.setLong(3, mentor.getAccount_id());
+      pstmt.setLong(4, mentor.getId());
+
+      int rows = pstmt.executeUpdate();
+      return rows > 0;
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
-    return false;
   }
 
+  // 删除导师（修复返回值问题）
   public boolean delete(long id) {
-    var sql = "Delete from mentor where id = ?";
-    try {
-      var statement = getConnection().prepareStatement(sql);
-      statement.setLong(1, id);
-      statement.executeUpdate();
+    String sql = "DELETE FROM mentor WHERE id=?";
+    try (Connection conn = getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setLong(1, id);
+      int rows = pstmt.executeUpdate();
+      return rows > 0;
     } catch (Exception e) {
       e.printStackTrace();
       return false;
     }
-    return false;
   }
 
+  // 获取所有导师（修复字段映射）
   public ArrayList<Mentor> getAll() {
-    var list = new ArrayList<Mentor>();
-    var sql = "Select * from mentor";
-    try {
-      var statement = getConnection().prepareStatement(sql);
-      var result = statement.executeQuery();
-      while (result.next()) {
-        var mentor = new Mentor();
-        mentor.setId(result.getLong("id"));
-        mentor.setName(result.getString("name"));
-        mentor.setCollege(result.getString("name"));
-        mentor.setAccount_id(result.getLong("account_id"));
+    ArrayList<Mentor> list = new ArrayList<>();
+    String sql = "SELECT * FROM mentor";
+    try (Connection conn = getConnection();
+         Statement stmt = conn.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
+
+      while (rs.next()) {
+        Mentor mentor = new Mentor();
+        mentor.setId(rs.getLong("id"));
+        mentor.setName(rs.getString("name"));
+        mentor.setCollege(rs.getString("collage"));
+        mentor.setAccount_id(rs.getLong("account_id"));
         list.add(mentor);
       }
     } catch (Exception e) {
-      return null;
+      e.printStackTrace();
+    }
+    return list;
+  }
+
+  // 根据账户ID获取导师
+  public Mentor getByAccountId(long accountId) {
+    String sql = "SELECT * FROM mentor WHERE account_id = ?";
+    try (Connection conn = getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setLong(1, accountId);
+      try (ResultSet rs = pstmt.executeQuery()) {
+        if (rs.next()) {
+          Mentor mentor = new Mentor();
+          mentor.setId(rs.getLong("id"));
+          mentor.setName(rs.getString("name"));
+          mentor.setCollege(rs.getString("collage"));
+          mentor.setAccount_id(rs.getLong("account_id"));
+          return mentor;
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
+  // 根据学院获取导师列表
+  public ArrayList<Mentor> getByCollage(String collage) {
+    ArrayList<Mentor> list = new ArrayList<>();
+    String sql = "SELECT * FROM mentor WHERE collage = ?";
+    try (Connection conn = getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+      pstmt.setString(1, collage);
+      try (ResultSet rs = pstmt.executeQuery()) {
+        while (rs.next()) {
+          Mentor mentor = new Mentor();
+          mentor.setId(rs.getLong("id"));
+          mentor.setName(rs.getString("name"));
+          mentor.setCollege(rs.getString("collage"));
+          mentor.setAccount_id(rs.getLong("account_id"));
+          list.add(mentor);
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
     return list;
   }
