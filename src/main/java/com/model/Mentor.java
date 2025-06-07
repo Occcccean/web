@@ -3,45 +3,45 @@ package com.model;
 import java.io.Serializable;
 
 public class Mentor implements Serializable {
-    private static final long serialVersionUID = 1L;
+  private static final long serialVersionUID = 1L;
 
-    private Long id;
-    private String name;         // 导师姓名
-    private String collage;      // 所属学院（可能拼写错误，通常应为college）
-    private Long account_id;     // 关联账户ID
+  private Long id;
+  private String name; // 导师姓名
+  private String collage;
+  private Long account_id; // 关联账户ID
 
-    // ===================== 访问器方法 =====================
+  // ===================== 访问器方法 =====================
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public String getName() {
-        return name;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getCollage() {
-        return collage;
-    }
+  public String getCollage() {
+    return collage;
+  }
 
-    public void setCollage(String collage) {
-        this.collage = collage;
-    }
+  public void setCollage(String collage) {
+    this.collage = collage;
+  }
 
-    public Long getAccount_id() {
-        return account_id;
-    }
+  public Long getAccount_id() {
+    return account_id;
+  }
 
-    public void setAccount_id(Long account_id) {
-        this.account_id = account_id;
-    }
+  public void setAccount_id(Long account_id) {
+    this.account_id = account_id;
+  }
 
 }

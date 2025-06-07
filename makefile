@@ -10,3 +10,6 @@ clean:
 
 test:
 	@curl ${url}
+
+sql:
+	@psql -U meteor password=meteor --host ${ip} -f ./student.sql
