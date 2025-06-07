@@ -20,7 +20,7 @@ public class Student implements Serializable {
     private String email;               // 邮箱
     private String dorm_id;             // 宿舍号
     private Integer grade;              // 年级
-    private String collage;             // 学院（注意：原表中为collage，可能拼写错误）
+    private String college;             // 学院（注意：原表中为college，可能拼写错误）
     private String major;               // 专业
     private String campus;              // 校区
     private Date entrance_date;         // 入学日期
@@ -148,12 +148,12 @@ public class Student implements Serializable {
         this.grade = grade;
     }
 
-    public String getCollage() {
-        return collage;
+    public String getCollege() {
+        return college;
     }
 
-    public void setCollage(String collage) {
-        this.collage = collage;
+    public void setCollege(String college) {
+        this.college = college;
     }
 
     public String getMajor() {

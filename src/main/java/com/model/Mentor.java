@@ -7,7 +7,7 @@ public class Mentor implements Serializable {
 
   private Long id;
   private String name; // 导师姓名
-  private String collage;
+  private String college;
   private Long account_id; // 关联账户ID
 
   // ===================== 访问器方法 =====================
@@ -28,12 +28,12 @@ public class Mentor implements Serializable {
     this.name = name;
   }
 
-  public String getCollage() {
-    return collage;
+  public String getCollege() {
+    return college;
   }
 
-  public void setCollage(String collage) {
-    this.collage = collage;
+  public void setCollege(String college) {
+    this.college = college;
   }
 
   public Long getAccount_id() {

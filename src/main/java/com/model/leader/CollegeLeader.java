@@ -7,7 +7,7 @@ public class CollegeLeader implements Serializable {
 
     private Long id;                // 主键ID
     private String name;            // 学院领导姓名
-    private String collage;         // 所属学院（注意：原表中为collage，可能拼写错误）
+    private String college;         // 所属学院（注意：原表中为college，可能拼写错误）
     private Long account_id;        // 关联账户ID（唯一）
 
     // ===================== 访问器方法 =====================
@@ -28,12 +28,12 @@ public class CollegeLeader implements Serializable {
         this.name = name;
     }
 
-    public String getCollage() {
-        return collage;
+    public String getCollege() {
+        return college;
     }
 
-    public void setCollage(String collage) {
-        this.collage = collage;
+    public void setCollege(String college) {
+        this.college = college;
     }
 
     public Long getAccount_id() {
