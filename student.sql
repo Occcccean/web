@@ -99,4 +99,3 @@ CREATE INDEX idx_student_college ON student(college);
 CREATE INDEX idx_student_major ON student(major);
 CREATE INDEX idx_student_mentor_id ON student(mentor_id);
 
-

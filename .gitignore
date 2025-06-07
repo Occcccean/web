@@ -3,3 +3,5 @@ target
 .project
 src/main/webapp/META-INF/context.xml
 .settings
+justfile
+makefile
