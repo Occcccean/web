@@ -45,7 +45,7 @@ CREATE TABLE student (
     major VARCHAR(100),
     campus VARCHAR(50),
     entrance_date DATE,
-    class VARCHAR(50),
+    class_id VARCHAR(50),
     wechat VARCHAR(50),
     qq VARCHAR(20),
     home_phone_number VARCHAR(20),
