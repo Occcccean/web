@@ -47,6 +47,30 @@ public class AccountDao extends BaseDao {
     }
   }
 
+  // 根据ID获取学生
+  public Account getByUsername(String username) {
+    var sql = "SELECT * FROM student WHERE username = ?";
+    try (var statement = getConnection().prepareStatement(sql)) {
+      statement.setString(1, username);
+      var result = statement.executeQuery();
+      if (result.next()) {
+        Account account = new Account();
+        account.setId(result.getLong("id"));
+        account.setUsername(username);
+        account.setPassword(result.getString("password"));
+        account.setRole(result.getString("role"));
+        account.setFailedTimes(result.getInt("failed_times"));
+        account.setLockTime(result.getTimestamp("lock_time"));
+        account.setLastPasswordChangeDate(result.getDate("last_password_change_date"));
+        return account;
+      }
+      return null;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return null;
+    }
+  }
+
   // 更新学生信息
   public boolean update(Account student) {
     var sql = "UPDATE account SET username=?, password=?, role=?, failed_times=?, lock_time=?, last_password_change_date=? where id=?";
