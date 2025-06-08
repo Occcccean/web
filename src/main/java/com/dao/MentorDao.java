@@ -89,8 +89,7 @@ public class MentorDao extends BaseDao {
     var list = new ArrayList<Mentor>();
     var sql = "Select * from mentor";
     try {
-      var statement = getConnection().prepareStatement(sql);
-      var result = statement.executeQuery();
+      var result = getConnection().createStatement().executeQuery(sql);
       while (result.next()) {
         var mentor = new Mentor();
         mentor.setId(result.getLong("id"));
