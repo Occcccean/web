@@ -1,6 +1,5 @@
 package com.model;
 
-import com.util.SM3Util;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.sql.Date;
@@ -10,24 +9,19 @@ public class Account implements Serializable {
 
   private Long id;
   private String username; // 用户名（学号/工号）
-  private String encryptedPassword; // 加密密码
+  private String password; // 加密密码
   private String role; // 用户角色
   private Integer failedTimes; // 登录失败次数
   private Timestamp lockTime; // 锁定时间
   private Date lastPasswordChangeDate; // 最后密码修改时间
-  private boolean firstLogin; // 是否首次登录（非数据库字段）
-
-  // ===================== 密码加密/解密访问器 =====================
 
   public String getPassword() {
-    return SM3Util.encrypt(encryptedPassword);
+    return password;
   }
 
   public void setPassword(String password) {
-    this.encryptedPassword = SM3Util.encrypt(password);
+    this.password = password;
   }
-
-  // ===================== 其他字段访问器 =====================
 
   public Long getId() {
     return id;
@@ -76,13 +70,4 @@ public class Account implements Serializable {
   public void setLastPasswordChangeDate(Date lastPasswordChangeDate) {
     this.lastPasswordChangeDate = lastPasswordChangeDate;
   }
-
-  public boolean isFirstLogin() {
-    return firstLogin;
-  }
-
-  public void setFirstLogin(boolean firstLogin) {
-    this.firstLogin = firstLogin;
-  }
-
 }
