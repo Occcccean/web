@@ -72,17 +72,17 @@ public class AccountDao extends BaseDao {
   }
 
   // 更新学生信息
-  public boolean update(Account student) {
+  public boolean update(Account account) {
     var sql = "UPDATE account SET username=?, password=?, role=?, failed_times=?, lock_time=?, last_password_change_date=? where id=?";
 
     try (var statement = getConnection().prepareStatement(sql)) {
-      statement.setString(1, student.getUsername());
-      statement.setString(2, student.getPassword());
-      statement.setString(3, student.getRole());
-      statement.setLong(4, student.getFailedTimes());
-      statement.setTimestamp(5, student.getLockTime());
-      statement.setDate(6, student.getLastPasswordChangeDate());
-      statement.setLong(7, student.getId());
+      statement.setString(1, account.getUsername());
+      statement.setString(2, account.getPassword());
+      statement.setString(3, account.getRole());
+      statement.setLong(4, account.getFailedTimes());
+      statement.setTimestamp(5, account.getLockTime());
+      statement.setDate(6, account.getLastPasswordChangeDate());
+      statement.setLong(7, account.getId());
       return statement.executeUpdate() > 0;
     } catch (Exception e) {
       e.printStackTrace();
