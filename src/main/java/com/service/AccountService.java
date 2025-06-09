@@ -30,6 +30,10 @@ public class AccountService {
     Role.add(name, role, dao.getByUsername(username).getId());
   }
 
+  public static Account getByUsername(String username) throws WebException {
+    return dao.getByUsername(username);
+  }
+
   public static void delete(long id) throws WebException {
     var account = dao.getById(id);
     if (account == null)

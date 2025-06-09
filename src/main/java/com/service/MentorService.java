@@ -10,16 +10,6 @@ public class MentorService {
 
     private final MentorDao mentorDao = new MentorDao();
 
-    // 添加导师
-    public boolean addMentor(Mentor mentor) {
-        // 1. 验证账户ID唯一性（基于现有DAO方法）
-        if (mentor.getAccount_id() != null && mentorDao.getByAccountId(mentor.getAccount_id()) != null) {
-            throw new IllegalArgumentException("账户ID已被使用");
-        }
-
-        // 2. 调用DAO添加导师
-        return mentorDao.add(mentor);
-    }
 
     // 根据ID获取导师
     public Mentor getMentorById(Long id) {

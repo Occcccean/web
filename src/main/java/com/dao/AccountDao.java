@@ -47,7 +47,7 @@ public class AccountDao extends BaseDao {
     }
   }
 
-  // 根据ID获取学生
+
   public Account getByUsername(String username) {
     var sql = "SELECT * FROM student WHERE username = ?";
     try (var statement = getConnection().prepareStatement(sql)) {
