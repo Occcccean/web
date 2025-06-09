@@ -23,7 +23,7 @@ public class StudentDao extends BaseDao {
       pstmt.setString(2, student.getName());
       pstmt.setString(3, student.getGender());
       pstmt.setString(4, student.getNation());
-      pstmt.setDate(5, new java.sql.Date(student.getBirth_date().getTime()));
+      pstmt.setDate(5, student.getBirth_date());
       pstmt.setString(6, student.getBirth_place());
       pstmt.setString(7, student.getId_number());
       pstmt.setString(8, student.getCountry());
@@ -35,7 +35,7 @@ public class StudentDao extends BaseDao {
       pstmt.setString(14, student.getCollege());
       pstmt.setString(15, student.getMajor());
       pstmt.setString(16, student.getCampus());
-      pstmt.setDate(17, new java.sql.Date(student.getEntrance_date().getTime()));
+      pstmt.setDate(17, student.getEntrance_date());
       pstmt.setString(18, student.getClass_id());
       pstmt.setString(19, student.getWechat());
       pstmt.setString(20, student.getQq());

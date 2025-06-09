@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class AccountDao extends BaseDao {
   public boolean add(Account account) {
-    var sql = "INSERT INTO account values (?, ?, ?, ?, ?, ?)";
+    var sql = "INSERT INTO account(username, password, role, failed_times, lock_time, last_password_change_date) values (?, ?, ?, ?, ?, ?)";
 
     try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
       statement.setString(1, account.getUsername());
@@ -27,7 +27,7 @@ public class AccountDao extends BaseDao {
       statement.setLong(1, id);
       var result = statement.executeQuery();
       if (result.next()) {
-        Account account = new Account();
+        var account = new Account();
         account.setId(id);
         account.setUsername(result.getString("username"));
         account.setPassword(result.getString("password"));
@@ -50,7 +50,7 @@ public class AccountDao extends BaseDao {
       statement.setString(1, username);
       var result = statement.executeQuery();
       if (result.next()) {
-        Account account = new Account();
+        var account = new Account();
         account.setId(result.getLong("id"));
         account.setUsername(username);
         account.setPassword(result.getString("password"));
