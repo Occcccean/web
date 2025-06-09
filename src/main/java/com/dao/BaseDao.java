@@ -9,8 +9,7 @@ public class BaseDao {
 
   public BaseDao() {
     try {
-      Context context = new InitialContext();
-      dataSource = (DataSource) context.lookup("java:comp/env/DB");
+      dataSource = (DataSource) new InitialContext().lookup("java:comp/env/DB");
     } catch (NamingException e) {
       e.printStackTrace();
     }

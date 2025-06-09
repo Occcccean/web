@@ -1,15 +1,13 @@
 package com.dao;
 
 import com.model.Account;
-import java.sql.*;
 import java.util.ArrayList;
 
 public class AccountDao extends BaseDao {
-  // 添加学生
   public boolean add(Account account) {
     var sql = "INSERT INTO account values (?, ?, ?, ?, ?, ?)";
 
-    try (PreparedStatement statement = getConnection().prepareStatement(sql)) {
+    try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
       statement.setString(1, account.getUsername());
       statement.setString(2, account.getPassword());
       statement.setString(3, account.getRole());
@@ -23,10 +21,9 @@ public class AccountDao extends BaseDao {
     }
   }
 
-  // 根据ID获取学生
   public Account getById(long id) {
-    var sql = "SELECT * FROM student WHERE id = ?";
-    try (var statement = getConnection().prepareStatement(sql)) {
+    var sql = "SELECT * FROM account WHERE id = ?";
+    try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
       statement.setLong(1, id);
       var result = statement.executeQuery();
       if (result.next()) {
@@ -47,10 +44,9 @@ public class AccountDao extends BaseDao {
     }
   }
 
-
   public Account getByUsername(String username) {
-    var sql = "SELECT * FROM student WHERE username = ?";
-    try (var statement = getConnection().prepareStatement(sql)) {
+    var sql = "SELECT * FROM account WHERE username = ?";
+    try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
       statement.setString(1, username);
       var result = statement.executeQuery();
       if (result.next()) {
@@ -71,11 +67,10 @@ public class AccountDao extends BaseDao {
     }
   }
 
-  // 更新学生信息
   public boolean update(Account account) {
     var sql = "UPDATE account SET username=?, password=?, role=?, failed_times=?, lock_time=?, last_password_change_date=? where id=?";
 
-    try (var statement = getConnection().prepareStatement(sql)) {
+    try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
       statement.setString(1, account.getUsername());
       statement.setString(2, account.getPassword());
       statement.setString(3, account.getRole());
@@ -92,7 +87,7 @@ public class AccountDao extends BaseDao {
 
   public boolean delete(long id) {
     var sql = "DELETE FROM account WHERE id=?";
-    try (var statement = getConnection().prepareStatement(sql)) {
+    try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
       statement.setLong(1, id);
       return statement.executeUpdate() > 0;
     } catch (Exception e) {
@@ -103,8 +98,11 @@ public class AccountDao extends BaseDao {
 
   public ArrayList<Account> getAll() {
     var list = new ArrayList<Account>();
-    var sql = "SELECT * FROM student";
-    try (var result = getConnection().createStatement().executeQuery(sql)) {
+    var sql = "SELECT * FROM account";
+    try (
+        var connection = getConnection();
+        var statement = connection.createStatement();
+        var result = statement.executeQuery(sql)) {
       while (result.next()) {
         var account = new Account();
         account.setId(result.getLong("id"));
