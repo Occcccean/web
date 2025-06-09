@@ -1,6 +1,7 @@
-package com.control;
+package com.control.account;
 
-import com.service.AcountService;
+import com.service.AccountService;
+import com.util.Utils;
 import com.util.exceptions.WebException;
 
 import java.io.IOException;
@@ -11,15 +12,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/addRole")
-public class addRole extends HttpServlet {
+@WebServlet("account/delete")
+public class Remove extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    var username = req.getParameter("name");
-    var password = req.getParameter("password");
-    var role = req.getParameter("role");
+    var id = Long.parseLong(req.getParameter("id"));
     try {
-      AcountService.add(username, password, role);
+      Utils.checkRole(req, "system_manager");
+      AccountService.delete(id);
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
     }
