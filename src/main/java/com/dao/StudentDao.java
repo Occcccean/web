@@ -207,12 +207,12 @@ public class StudentDao extends BaseDao {
   }
 
   // 根据学号获取学生
-  public Student getByStudentId(String studentId) {
+  public Student getByStudentId(String student_Id) {
     String sql = "SELECT * FROM student WHERE student_id = ?";
     try (Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
-      pstmt.setString(1, studentId);
+      pstmt.setString(1, student_Id);
       try (ResultSet rs = pstmt.executeQuery()) {
         if (rs.next()) {
           return buildStudentFromResultSet(rs);
