@@ -15,8 +15,6 @@ public class AccountService {
 
   public static void add(String name, String username, String password, String role) throws WebException {
     var passwd = new Password(username);
-    if (!passwd.isValidate())
-      throw new WebException("非法密码");
 
     if (dao.getByUsername(username) != null)
       throw new WebException("已经存在的用户名");

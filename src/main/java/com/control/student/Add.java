@@ -30,7 +30,7 @@ public class Add  extends HttpServlet {
             var name=req.getParameter("name");
             var gender=req.getParameter("gender");
             var id_number=req.getParameter("id_number");
-            var phone_number=req.getParameter("phone+number");
+            var phone_number=req.getParameter("phone_number");
             StudentService.add(sid,name,gender,id_number,phone_number);
         } catch (WebException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);

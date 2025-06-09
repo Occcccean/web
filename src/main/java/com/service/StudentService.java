@@ -31,6 +31,7 @@ public class StudentService {
         student.setName(name);
         student.setGender(gender);
         student.setStudent_id(student_id);
+        student.setId_number(id_number);
         student.setPhone_number(phone_number);
         studentDao.update(student);
 
