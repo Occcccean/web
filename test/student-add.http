@@ -1,1 +1,31 @@
-{ "name": "LingXinyu", "id_number": "10", "phone_number": "199999999999", "student_id": "390232344", "gender": "男" }
+@hostname=47.96.254.64
+@appname=myapp
+@url=http://{{hostname}}/{{appname}}
+
+POST {{url}}/student/add
+Content-Type: application/x-www-form-urlencoded
+
+student_id=302023315008&
+name=lingshin&
+gender=男&
+id_number=123456200001011234&
+phone_number=10010001000
+
+### Login
+
+POST {{url}}/login
+Content-Type: application/x-www-form-urlencoded
+
+username=lingshin&
+password=lingshin
+
+###
+
+POST {{url}}/account/add
+Content-Type: application/x-www-form-urlencoded
+Cookie: JSESSIONID={{Login.response.cookies.JSESSIONID.value}}
+
+name=abcd&
+username=abcd&
+password=1234&
+role=student_leader

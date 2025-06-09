@@ -13,7 +13,10 @@ public class Utils {
 
   public static Account getAccount(HttpServletRequest req) throws WebException {
     try {
-      return (Account) req.getSession().getAttribute("account");
+      var account = (Account) req.getSession().getAttribute("account");
+      if (account == null)
+        throw new WebException("没有登录");
+      return account;
     } catch (ClassCastException e) {
       throw new WebException("没有登录");
     }

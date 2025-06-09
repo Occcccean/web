@@ -11,9 +11,9 @@ public class StudentDao extends BaseDao {
         "student_id, name, gender, nation, birth_date, " +
         "birth_place, id_number, country, home_address, " +
         "phone_number, email, dorm_id, grade, college, " +
-        "major, campus, entrance_date, class_name, " +
+        "major, campus, entrance_date, class_id, " +
         "wechat, qq, home_phone_number, home_contact_man, " +
-        "account_id, mentor_id, mentor_name) " +
+        "account_id, mentor_id, mentor) " +
         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try (Connection conn = getConnection();
@@ -81,14 +81,14 @@ public class StudentDao extends BaseDao {
           student.setMajor(rs.getString("major"));
           student.setCampus(rs.getString("campus"));
           student.setEntrance_date(rs.getDate("entrance_date"));
-          student.setClass_id(rs.getString("class_name"));
+          student.setClass_id(rs.getString("class_id"));
           student.setWechat(rs.getString("wechat"));
           student.setQq(rs.getString("qq"));
           student.setHome_phone_number(rs.getString("home_phone_number"));
           student.setHome_contact_man(rs.getString("home_contact_man"));
           student.setAccount_id(rs.getLong("account_id"));
           student.setMentor_id(rs.getLong("mentor_id"));
-          student.setMentor(rs.getString("mentor_name"));
+          student.setMentor(rs.getString("mentor"));
           return student;
         }
       }
@@ -104,9 +104,9 @@ public class StudentDao extends BaseDao {
         "student_id=?, name=?, gender=?, nation=?, birth_date=?, " +
         "birth_place=?, id_number=?, country=?, home_address=?, " +
         "phone_number=?, email=?, dorm_id=?, grade=?, college=?, " +
-        "major=?, campus=?, entrance_date=?, class_name=?, " +
+        "major=?, campus=?, entrance_date=?, class_id=?, " +
         "wechat=?, qq=?, home_phone_number=?, home_contact_man=?, " +
-        "account_id=?, mentor_id=?, mentor_name=? " +
+        "account_id=?, mentor_id=?, mentor=? " +
         "WHERE id=?";
 
     try (Connection conn = getConnection();
@@ -190,14 +190,14 @@ public class StudentDao extends BaseDao {
         student.setMajor(rs.getString("major"));
         student.setCampus(rs.getString("campus"));
         student.setEntrance_date(rs.getDate("entrance_date"));
-        student.setClass_id(rs.getString("class_name"));
+        student.setClass_id(rs.getString("class_id"));
         student.setWechat(rs.getString("wechat"));
         student.setQq(rs.getString("qq"));
         student.setHome_phone_number(rs.getString("home_phone_number"));
         student.setHome_contact_man(rs.getString("home_contact_man"));
         student.setAccount_id(rs.getLong("account_id"));
         student.setMentor_id(rs.getLong("mentor_id"));
-        student.setMentor(rs.getString("mentor_name"));
+        student.setMentor(rs.getString("mentor"));
         list.add(student);
       }
     } catch (Exception e) {
@@ -301,14 +301,14 @@ public class StudentDao extends BaseDao {
     student.setMajor(rs.getString("major"));
     student.setCampus(rs.getString("campus"));
     student.setEntrance_date(rs.getDate("entrance_date"));
-    student.setClass_id(rs.getString("class_name"));
+    student.setClass_id(rs.getString("class_id"));
     student.setWechat(rs.getString("wechat"));
     student.setQq(rs.getString("qq"));
     student.setHome_phone_number(rs.getString("home_phone_number"));
     student.setHome_contact_man(rs.getString("home_contact_man"));
     student.setAccount_id(rs.getLong("account_id"));
     student.setMentor_id(rs.getLong("mentor_id"));
-    student.setMentor(rs.getString("mentor_name"));
+    student.setMentor(rs.getString("mentor"));
     return student;
   }
 }

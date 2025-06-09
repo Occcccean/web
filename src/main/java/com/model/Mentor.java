@@ -5,18 +5,18 @@ import java.io.Serializable;
 public class Mentor implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private Long id;
+  private long id;
   private String name; // 导师姓名
   private String college;
-  private Long account_id; // 关联账户ID
+  private long account_id; // 关联账户ID
 
   // ===================== 访问器方法 =====================
 
-  public Long getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -36,11 +36,11 @@ public class Mentor implements Serializable {
     this.college = college;
   }
 
-  public Long getAccount_id() {
+  public long getAccount_id() {
     return account_id;
   }
 
-  public void setAccount_id(Long account_id) {
+  public void setAccount_id(long account_id) {
     this.account_id = account_id;
   }
 

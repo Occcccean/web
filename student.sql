@@ -35,6 +35,7 @@ CREATE TABLE student (
     birth_date DATE,
     birth_place VARCHAR(100),
     id_number VARCHAR(20),
+    student_id VARCHAR(20),
     country VARCHAR(50),
     home_address VARCHAR(200),
     phone_number VARCHAR(20),
