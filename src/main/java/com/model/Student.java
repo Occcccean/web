@@ -1,12 +1,12 @@
 package com.model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Student implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private Long id;
+  private long id;
   private String student_id; // 学号
   private String name; // 姓名
   private String gender; // 性别
@@ -19,7 +19,7 @@ public class Student implements Serializable {
   private String phone_number; // 手机号
   private String email; // 邮箱
   private String dorm_id; // 宿舍号
-  private Integer grade; // 年级
+  private int grade; // 年级
   private String college; // 学院（注意：原表中为college，可能拼写错误）
   private String major; // 专业
   private String campus; // 校区
@@ -30,17 +30,17 @@ public class Student implements Serializable {
   private String home_phone_number; // 家庭电话
   private String home_contact_man; // 家庭联系人
 
-  private Long account_id; // 账户ID
-  private Long mentor_id; // 导师ID
+  private long account_id; // 账户ID
+  private long mentor_id; // 导师ID
   private String mentor; // 导师姓名
 
   // ===================== 访问器方法 =====================
 
-  public Long getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -140,11 +140,11 @@ public class Student implements Serializable {
     this.dorm_id = dorm_id;
   }
 
-  public Integer getGrade() {
+  public int getGrade() {
     return grade;
   }
 
-  public void setGrade(Integer grade) {
+  public void setGrade(int grade) {
     this.grade = grade;
   }
 
@@ -220,19 +220,19 @@ public class Student implements Serializable {
     this.home_contact_man = home_contact_man;
   }
 
-  public Long getAccount_id() {
+  public long getAccount_id() {
     return account_id;
   }
 
-  public void setAccount_id(Long account_id) {
+  public void setAccount_id(long account_id) {
     this.account_id = account_id;
   }
 
-  public Long getMentor_id() {
+  public long getMentor_id() {
     return mentor_id;
   }
 
-  public void setMentor_id(Long mentor_id) {
+  public void setMentor_id(long mentor_id) {
     this.mentor_id = mentor_id;
   }
 

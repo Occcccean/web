@@ -7,11 +7,11 @@ import java.sql.Date;
 public class Account implements Serializable {
   private static final long serialVersionUID = 1L;
 
-  private Long id;
+  private long id;
   private String username; // 用户名（学号/工号）
   private String password; // 加密密码
   private String role; // 用户角色
-  private Integer failedTimes; // 登录失败次数
+  private int failedTimes; // 登录失败次数
   private Timestamp lockTime; // 锁定时间
   private Date lastPasswordChangeDate; // 最后密码修改时间
 
@@ -23,11 +23,11 @@ public class Account implements Serializable {
     this.password = password;
   }
 
-  public Long getId() {
+  public long getId() {
     return id;
   }
 
-  public void setId(Long id) {
+  public void setId(long id) {
     this.id = id;
   }
 
@@ -47,11 +47,11 @@ public class Account implements Serializable {
     this.role = role;
   }
 
-  public Integer getFailedTimes() {
+  public int getFailedTimes() {
     return failedTimes;
   }
 
-  public void setFailedTimes(Integer failedTimes) {
+  public void setFailedTimes(int failedTimes) {
     this.failedTimes = failedTimes;
   }
 

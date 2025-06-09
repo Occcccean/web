@@ -5,3 +5,6 @@ src/main/webapp/META-INF/context.xml
 .settings
 justfile
 makefile
+test/student-add.http
+test/student-add.http
+test/student-add.http
