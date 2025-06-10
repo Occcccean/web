@@ -16,7 +16,7 @@ public class Add extends HttpServlet {
     try {
       // 设置编码
       req.setCharacterEncoding("UTF-8");
-      resp.setContentType("application/json;charset=UTF-8");
+      resp.setContentType("text/plain;charset=UTF-8");
 
       var sid = req.getParameter("student_id");
       var name = req.getParameter("name");

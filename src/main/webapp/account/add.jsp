@@ -50,8 +50,23 @@
         <h2 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark">添加新账号</h2>
       </div>
 
-      <form id="accountForm" class="space-y-6">
+      <form id="accountForm" class="space-y-6" method="post" action="/myapp/account/add">
         <div class="space-y-5">
+          <div class="space-y-2">
+            <label for="name" class="block font-medium text-gray-700">
+              姓名
+            </label>
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                <i class="fa fa-user"></i>
+              </span>
+              <input type="text" id="name" name="name" required
+                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary/50 focus:border-primary outline-none transition-custom"
+                placeholder="请输入账号名">
+            </div>
+            <p class="text-xs text-gray-500">姓名必须要是人名</p>
+          </div>
+
           <div class="space-y-2">
             <label for="username" class="block font-medium text-gray-700">
               账号名
@@ -142,23 +157,28 @@
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-            <% for (account : AccountService.getAll()) { %>
+            <% for (var account : AccountService.getAll()) { %>
             <tr class="hover:bg-gray-50 transition-custom">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
-                  <div :class="`text-${colorOf(`mentor`)}-600`"
-                    class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                    <i class="fa fa-user"></i>
-                  </div>
+                  <% out.write(
+                  "<div :class=\"`text-${colorOf('"+ account.getRole() +"')}-600`\"" +
+                    "class=\"h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3\">" +
+                    "<i class=\"fa fa-user\"></i>" +
+                  "</div>");
+                  %>
                   <div>
-                    <div class="text-sm font-medium text-gray-900"><%= account.getName() %></div>
+                    <div class="text-sm font-medium text-gray-900"><%= account.getUsername() %></div>
                   </div>
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
-                  <%= account.getRole() %>
-                </span>
+                <% out.write(
+                "<span class=\"px-2 inline-flex text-xs leading-5 font-semibold rounded-full\" " +
+                  ":class=\"`bg-${colorOf('"+ account.getRole() +"')}-100 text-${colorOf('"+ account.getRole() +"')}-800`\">" +
+                  account.getRole() +
+                "</span>");
+                %>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <%= account.getLastPasswordChangeDate() %>
