@@ -23,6 +23,7 @@ public class Add extends HttpServlet {
     try {
       Utils.checkRole(req, "system_manager");
       AccountService.add(name, username, password, role);
+      resp.getWriter().write("200 ok");
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
     }

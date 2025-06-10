@@ -5,6 +5,7 @@ import com.util.exceptions.WebException;
 
 import java.sql.Timestamp;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Date;
 
 import com.dao.AccountDao;
@@ -54,6 +55,10 @@ public class AccountService {
 
     if (!dao.update(account))
       throw new WebException("修改失败");
+  }
+
+  public static ArrayList<Account> getAll() throws WebException {
+    return dao.getAll();
   }
 
   public static Account login(String username, String password) throws WebException {
