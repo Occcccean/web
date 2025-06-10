@@ -2,15 +2,6 @@
 @appname=myapp
 @url=http://{{hostname}}/{{appname}}
 
-POST {{url}}/student/add
-Content-Type: application/x-www-form-urlencoded
-
-student_id=302023315008&
-name=lingshin&
-gender=男&
-id_number=123456200001011234&
-phone_number=10010001000
-
 ### Login
 
 POST {{url}}/login
@@ -25,7 +16,53 @@ POST {{url}}/account/add
 Content-Type: application/x-www-form-urlencoded
 Cookie: JSESSIONID={{Login.response.cookies.JSESSIONID.value}}
 
-name=abcd&
-username=abcd&
+name=abcc&
+username=abcdc&
 password=1234&
 role=student_leader
+
+###
+
+POST {{url}}/student/add
+Content-Type: application/x-www-form-urlencoded
+
+student_id=301234123128&
+name=lxy&
+gender=男&
+id_number=411524200407208022&
+phone_number=19858172400
+
+### lxy
+
+POST {{url}}/student/update
+Content-Type: application/x-www-form-urlencoded
+
+student_id=301234123128&
+name=lxy&
+gender=男&
+id_number=411524200407208022&
+phone_number=19858172400&
+nation=汉&
+birth_date=2004-9-30&
+birth_place=bzd&
+country=中国&
+home_address=西方极乐世界&
+email=244151@qq.com&
+dorm_id=219&
+grade=1&
+college=不知道&
+major=计算机&
+campus=校区&
+entrance_date=2022-2-22&
+class_id=10&
+wechat=1985445&
+qq=244151&
+home_phone_number=451451451&
+home_contact_man=佛祖&
+mentor_id=1&
+mentor=不知道
+
+### delete
+
+DELETE {{url}}/student/delete?id=6
+Content-Type: application/x-www-form-urlencoded

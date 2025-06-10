@@ -16,7 +16,7 @@ public class Add extends HttpServlet {
     try {
       // 设置编码
       req.setCharacterEncoding("UTF-8");
-      resp.setContentType("application/json;charset=UTF-8");
+      resp.setContentType("text/plain;charset=UTF-8");
 
       var sid = req.getParameter("student_id");
       var name = req.getParameter("name");
@@ -24,11 +24,12 @@ public class Add extends HttpServlet {
       var id_number = req.getParameter("id_number");
       var phone_number = req.getParameter("phone_number");
       StudentService.add(sid, name, gender, id_number, phone_number);
+      resp.getWriter().write("200 ok");
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
-    } catch (NullPointerException e){
+    } catch (NullPointerException e) {
       resp.getWriter().write("空指针异常: " + e.getMessage());
-    } catch(Exception e){
+    } catch (Exception e) {
       resp.getWriter().write("未知异常: " + e.getMessage());
     }
   }

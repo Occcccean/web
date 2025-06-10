@@ -54,8 +54,7 @@ CREATE TABLE student (
     account_id INTEGER UNIQUE,
     mentor_id INTEGER,
     mentor VARCHAR(50),
-    FOREIGN KEY (account_id) REFERENCES account(id) ON DELETE SET NULL,
-    FOREIGN KEY (mentor_id) REFERENCES mentor(id) ON DELETE SET NULL
+    FOREIGN KEY (account_id) REFERENCES account(id) ON DELETE SET NULL
 );
 
 

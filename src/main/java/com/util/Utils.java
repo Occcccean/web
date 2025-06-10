@@ -23,7 +23,7 @@ public class Utils {
   }
 
   public static boolean isUsernameMatches(HttpServletRequest req, String username) throws WebException {
-    return getAccount(req).getUsername() == username;
+    return getAccount(req).getUsername().equals(username);
   }
 
   public static void checkUsername(HttpServletRequest req, String username) throws WebException {
@@ -32,7 +32,7 @@ public class Utils {
   }
 
   public static boolean isIdMatches(HttpServletRequest req, Long id) throws WebException {
-    return getAccount(req).getId() != id;
+    return getAccount(req).getId() == id;
   }
 
   public static void checkId(HttpServletRequest req, Long id) throws WebException {
@@ -41,11 +41,11 @@ public class Utils {
   }
 
   public static boolean isRoleMatches(HttpServletRequest req, String role) throws WebException {
-    return getAccount(req).getRole() == role;
+    return getAccount(req).getRole().equals(role);
   }
 
   public static void checkRole(HttpServletRequest req, String role) throws WebException {
     if (!isRoleMatches(req, role))
-      throw new UnAuthException(role);
+      throw new UnAuthException(role, getAccount(req).getRole());
   }
 }

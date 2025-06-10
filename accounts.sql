@@ -1,21 +1,2 @@
-insert into account(username, password) values ('SkyWalker_2025',               'Sky@Walker2025!');
-insert into account(username, password) values ('OceanBreeze_06',               'Breeze#06Ocean_');
-insert into account(username, password) values ('MountainEcho_Leo',             'Echo$Leo2025');
-insert into account(username, password) values ('DesertRose_July',              'Rose@July2025!');
-insert into account(username, password) values ('ForestGuardian_Tom',           'Guardian#Tom2025');
-insert into account(username, password) values ('GalaxyExplorer_Lisa',          'Explorer$Lisa2025');
-insert into account(username, password) values ('NebulaDancer_08',              'Dancer@08Nebula_');
-insert into account(username, password) values ('PolarLight_Anna',              'Light#Anna2025!');
-insert into account(username, password) values ('JungleAdventurer_Mike',        'Adventurer$Mike2025');
-insert into account(username, password) values ('CyberPioneer_Lucy',            'Pioneer@Lucy2025!');
-insert into account(username, password) values ('SolarFlare_2025',              'Flare#2025XYZ!');
-insert into account(username, password) values ('LunarObserver_June',           'Observer$June2025');
-insert into account(username, password) values ('MysticRiver_Jack',             'River@Jack2025!');
-insert into account(username, password) values ('VintageBook_Alice',            'Book#Alice2025!');
-insert into account(username, password) values ('ModernArt_09',                 'Art@09Modern_2025');
-insert into account(username, password) values ('DigitalNomad_Bob',             'Nomad$Bob2025!');
-insert into account(username, password) values ('GoldenSunset_July',            'Sunset@July2025!');
-insert into account(username, password) values ('SilverMoon_06',                'Moon#06Silver_2025');
-insert into account(username, password) values ('CyberKnight_Lily',             'Knight@Lily2025!');
-insert into account(username, password) values ('PixelArtist_Mark',             'Artist$Mark2025!');
+insert into account(username, password, role) values ('lingshin', '1852c58a9583fbe9af0f80c6ca62ebb5257d13c5c3cf8f13a89caffdc405a5c9', 'system_manager');
 
