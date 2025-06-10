@@ -28,7 +28,7 @@ public class GetStudents extends HttpServlet {
             String mentorIdStr = req.getParameter("mentorId");
             if (mentorIdStr == null || mentorIdStr.isEmpty()) {
                 throw new WebException("ID不能为空");
-                return;
+
             }
 
             long mentorId = Long.parseLong(mentorIdStr);
@@ -36,24 +36,13 @@ public class GetStudents extends HttpServlet {
             // 验证导师是否存在
             if (mentorDao.getById(mentorId)==null) {
                 throw new WebException("指定导师不存在");
-                return;
+
             }
 
             // 获取导师的学生列表
             ArrayList<Student> students = studentDao.getByMentorId(mentorId);
 
-            for (int i = 0; i < students.size(); i++) {
-                jsonResponse.append(studentToJson(students.get(i)));
-                if (i < students.size() - 1) {
-                    jsonResponse.append(",");
-                }
-            }
 
-            jsonResponse.append("]");
-
-            // 返回学生列表
-            out.print(jsonResponse.toString());
-            out.flush();
         } catch (NumberFormatException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             resp.getWriter().write("{\"code\":400,\"message\":\"无效的导师ID格式\"}");
