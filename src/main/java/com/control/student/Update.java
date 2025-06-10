@@ -14,6 +14,8 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
+
+
 @WebServlet("/student/update")
 public class Update extends HttpServlet {
     private final StudentDao studentDao = new StudentDao();
@@ -107,7 +109,7 @@ public class Update extends HttpServlet {
         // 关联ID
         updateLongField(student::setAccount_id, req.getParameter("account_id"));
         updateLongField(student::setMentor_id, req.getParameter("mentor_id"));
-        updateStringField(student::setMentor, req.getParameter("mentor_name"));
+        updateStringField(student::setMentor, req.getParameter("mentor"));
     }
 
     // 辅助方法：更新字符串字段
