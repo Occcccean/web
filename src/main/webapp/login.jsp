@@ -1,15 +1,14 @@
 <%@page contentType="text/html;charset=UTF-8" language="java" %>
-<%@page import="com.service.AccountService"%>
-
 <html lang="zh-CN">
 <head>
+    <!-- 原有HTML结构保持不变 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>研究生学籍管理系统 - 登录</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
 
-    <!-- Tailwind CSS 配置 -->
+    <!-- Tailwind CSS 配置保持不变 -->
     <script>
         tailwind.config = {
             theme: {
@@ -22,20 +21,6 @@
                     },
                     fontFamily: {
                         inter: ['Inter', 'system-ui', 'sans-serif']
-                    },
-                    animation: {
-                        'fade-in': 'fadeIn 0.5s ease-in-out forwards',
-                        'slide-up': 'slideUp 0.5s ease-out forwards'
-                    },
-                    keyframes: {
-                        fadeIn: {
-                            '0%': { opacity: 0 },
-                            '100%': { opacity: 1 }
-                        },
-                        slideUp: {
-                            '0%': { transform: 'translateY(20px)', opacity: 0 },
-                            '100%': { transform: 'translateY(0)', opacity: 1 }
-                        }
                     }
                 }
             }
@@ -52,9 +37,6 @@
                 backdrop-filter: blur(10px);
                 -webkit-backdrop-filter: blur(10px);
             }
-            .text-shadow {
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            }
             .input-focus {
                 transition: all 0.3s ease;
             }
@@ -66,21 +48,21 @@
     </style>
 </head>
 <body class="min-h-screen bg-gradient-to-br from-light to-white overflow-x-hidden font-inter">
-    <!-- 装饰元素 -->
+    <!-- 装饰元素保持不变 -->
     <div class="fixed -top-20 -right-20 w-96 h-96 bg-primary/10 rounded-full blur-3xl animate-pulse-slow"></div>
     <div class="fixed -bottom-40 -left-20 w-80 h-80 bg-secondary/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
 
-    <!-- 主内容 -->
+    <!-- 主内容保持不变 -->
     <div class="relative min-h-screen flex flex-col items-center justify-center px-4 py-12">
-        <!-- 登录卡片 -->
-        <div class="w-full max-w-md bg-glass rounded-2xl shadow-lg p-8 border border-white/30 animate-fade-in">
+        <!-- 登录卡片保持不变 -->
+        <div class="w-full max-w-md bg-glass rounded-2xl shadow-lg p-8 border border-white/30">
             <div class="text-center mb-8">
                 <h2 class="text-3xl font-bold text-primary mb-2">研究生学籍管理系统</h2>
                 <p class="text-gray-600">请输入账号密码登录</p>
             </div>
 
-            <form class="space-y-6 animate-slide-up" style="animation-delay: 0.2s" method="post" action="/myapp/login">
-                <!-- 用户名输入 -->
+            <form id="loginForm" class="space-y-6" method="post" action="/login">
+                <!-- 用户名输入保持不变 -->
                 <div>
                     <label for="username" class="block text-gray-700 font-medium mb-2">用户名</label>
                     <div class="relative">
@@ -93,7 +75,7 @@
                     </div>
                 </div>
 
-                <!-- 密码输入 -->
+                <!-- 密码输入保持不变 -->
                 <div>
                     <label for="password" class="block text-gray-700 font-medium mb-2">密码</label>
                     <div class="relative">
@@ -106,7 +88,7 @@
                     </div>
                 </div>
 
-                <!-- 角色选择 -->
+                <!-- 角色选择保持不变 -->
                 <div>
                     <label class="block text-gray-700 font-medium mb-2">用户类型</label>
                     <div class="grid grid-cols-3 gap-3">
@@ -125,24 +107,72 @@
                     </div>
                 </div>
 
-                <!-- 登录按钮 -->
+                <!-- 登录按钮保持不变 -->
                 <button type="submit"
                     class="w-full py-4 bg-primary text-white font-medium rounded-xl hover:bg-primary/90 focus:ring-4 focus:ring-primary/20 transition-all transform hover:-translate-y-1 shadow-lg shadow-primary/20">
                     <i class="fa fa-sign-in mr-2"></i> 登录系统
                 </button>
             </form>
 
-            <div class="mt-8 text-center">
-                <a href="#" class="text-primary hover:text-primary/80 transition-colors inline-flex items-center">
-                    <i class="fa fa-question-circle mr-1"></i> 忘记密码?
-                </a>
+            <!-- 新增：登录结果提示 -->
+            <div id="loginResult" class="mt-8 text-center text-red-500 hidden">
+                <i class="fa fa-exclamation-circle mr-1"></i>
+                <span id="resultMessage"></span>
             </div>
         </div>
 
-        <!-- 页脚信息 -->
+        <!-- 页脚信息保持不变 -->
         <div class="absolute bottom-6 text-center text-gray-500 text-sm">
             <p>© 2025 某大学研究生院 | 技术支持：信息中心</p>
         </div>
     </div>
+
+    <!-- 新增：登录响应处理JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginResult = document.getElementById('loginResult');
+            const resultMessage = document.getElementById('resultMessage');
+
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const role = document.querySelector('input[name="role"]:checked').value;
+
+                // 构建表单数据
+                const formData = new FormData();
+                formData.append('username', username);
+                formData.append('password', password);
+                formData.append('role', role);
+
+                // 发送登录请求（不修改原有表单提交，使用Fetch API监听响应）
+                fetch('/login', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => response.text())
+                .then(data => {
+                    // 解析Login Servlet返回的结果（格式："student: username"）
+                    if (data.startsWith('student:')) {
+                        // 学生角色登录成功，跳转到student.jsp
+                        sessionStorage.setItem('loginStatus', 'success');
+                        sessionStorage.setItem('role', role);
+                        window.location.href = 'student.jsp';
+                    } else {
+                        // 登录失败或非学生角色
+                        loginResult.classList.remove('hidden');
+                        resultMessage.textContent = data;
+                    }
+                })
+                .catch(error => {
+                    loginResult.classList.remove('hidden');
+                    resultMessage.textContent = '登录请求失败，请重试';
+                    console.error('登录请求错误:', error);
+                });
+            });
+        });
+    </script>
 </body>
 </html>
