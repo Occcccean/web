@@ -107,7 +107,7 @@ public class AccountService {
       var dateSpan = ChronoUnit.DAYS.between(
           last_password_date.toLocalDate(),
           date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-      if (dateSpan < 90)
+      if (dateSpan > 90)
         throw new WebException("密码太老了");
     }
   }
