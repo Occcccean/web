@@ -5,8 +5,14 @@ import com.util.exceptions.UnAuthException;
 import com.util.exceptions.WebException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 public class Utils {
+  public static void redirect(HttpServletResponse resp, String location) {
+    resp.setStatus(HttpServletResponse.SC_MOVED_TEMPORARILY);
+    resp.setHeader("location", "/myapp" + location);
+  }
+
   public static void setAccount(HttpServletRequest req, Account account) {
     req.getSession().setAttribute("account", account);
   }

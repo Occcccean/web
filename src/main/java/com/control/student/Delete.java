@@ -17,9 +17,6 @@ public class Delete extends HttpServlet {
   @Override
   protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
-      req.setCharacterEncoding("UTF-8");
-      resp.setContentType("text/plain;charset=UTF-8");
-
       // 从请求中获取学生ID
       String idStr = req.getParameter("id");
       if (idStr == null || idStr.isEmpty()) {

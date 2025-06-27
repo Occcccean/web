@@ -22,7 +22,7 @@ public class Login extends HttpServlet {
     try {
       var account = AccountService.login(username, password);
       Utils.setAccount(req, account);
-      resp.getWriter().write(account.getRole() + ": " + account.getUsername());
+      Utils.redirect(resp, "/account/add.jsp");
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
     }

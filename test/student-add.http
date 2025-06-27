@@ -16,10 +16,10 @@ POST {{url}}/account/add
 Content-Type: application/x-www-form-urlencoded
 Cookie: JSESSIONID={{Login.response.cookies.JSESSIONID.value}}
 
-name=abcc&
-username=abcdc&
+name=陈睿&
+username=cherry&
 password=1234&
-role=student_leader
+role=college_leader
 
 ###
 
@@ -66,3 +66,13 @@ mentor=不知道
 
 DELETE {{url}}/student/delete?id=6
 Content-Type: application/x-www-form-urlencoded
+
+###
+
+POST {{url}}/account/password?id=4&password=Meteor@123
+Cookie: JSESSIONID={{Login.response.cookies.JSESSIONID.value}}
+Content-Type: application/x-www-form-urlencoded
+
+###
+
+GET  {{url}}/student/list

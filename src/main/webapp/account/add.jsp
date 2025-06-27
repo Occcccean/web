@@ -161,24 +161,20 @@
             <tr class="hover:bg-gray-50 transition-custom">
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="flex items-center">
-                  <% out.write(
-                  "<div :class=\"`text-${colorOf('"+ account.getRole() +"')}-600`\"" +
-                    "class=\"h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3\">" +
-                    "<i class=\"fa fa-user\"></i>" +
-                  "</div>");
-                  %>
+                  <div :class="`text-${colorOf( '<%= account.getRole() %>' )}-600`"
+                    class="h-8 w-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                    <i class="fa fa-user"></i>
+                  </div>
                   <div>
                     <div class="text-sm font-medium text-gray-900"><%= account.getUsername() %></div>
                   </div>
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <% out.write(
-                "<span class=\"px-2 inline-flex text-xs leading-5 font-semibold rounded-full\" " +
-                  ":class=\"`bg-${colorOf('"+ account.getRole() +"')}-100 text-${colorOf('"+ account.getRole() +"')}-800`\">" +
-                  account.getRole() +
-                "</span>");
-                %>
+                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
+                      :class="`bg-${colorOf('<%= account.getRole() %>')}-100 text-${colorOf('<%= account.getRole() %>')}-800`">
+                      <%= account.getRole() %>
+                </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                   <%= account.getLastPasswordChangeDate() %>
@@ -196,24 +192,6 @@
             <% } %>
           </tbody>
         </table>
-      </div>
-      <div class="mt-4 flex justify-between items-center">
-        <div class="text-sm text-gray-500">
-          显示 1 到 3 条，共 25 条记录
-        </div>
-        <div class="flex space-x-1">
-          <button
-            class="px-3 py-1 border border-gray-300 rounded-md text-gray-500 bg-white hover:bg-gray-50 disabled:opacity-50"
-            disabled>
-            <i class="fa fa-chevron-left text-xs"></i>
-          </button>
-          <button class="px-3 py-1 border border-primary bg-primary text-white rounded-md">1</button>
-          <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">2</button>
-          <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">3</button>
-          <button class="px-3 py-1 border border-gray-300 rounded-md text-gray-700 bg-white hover:bg-gray-50">
-            <i class="fa fa-chevron-right text-xs"></i>
-          </button>
-        </div>
       </div>
     </div>
   </main>

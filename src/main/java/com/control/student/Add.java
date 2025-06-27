@@ -15,9 +15,6 @@ public class Add extends HttpServlet {
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
       // 设置编码
-      req.setCharacterEncoding("UTF-8");
-      resp.setContentType("text/plain;charset=UTF-8");
-
       var sid = req.getParameter("student_id");
       var name = req.getParameter("name");
       var gender = req.getParameter("gender");

@@ -21,9 +21,6 @@ public class Update extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     try {
-      req.setCharacterEncoding("UTF-8");
-      resp.setContentType("text/plain;charset=UTF-8");
-
       // 获取学生学号并验证
       String idStr = req.getParameter("student_id");
       if (idStr == null || idStr.isEmpty()) {

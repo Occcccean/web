@@ -20,7 +20,7 @@ public class ChangePassword extends HttpServlet {
     var password = req.getParameter("password");
     var id = Long.parseLong(req.getParameter("id"));
     try {
-      if (!Utils.isRoleMatches(req, "system_manager") || !Utils.isIdMatches(req, id))
+      if (!Utils.isRoleMatches(req, "system_manager") && !Utils.isIdMatches(req, id))
         throw new WebException("权限不足");
       AccountService.changePassword(id, password);
     } catch (WebException e) {

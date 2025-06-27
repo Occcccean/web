@@ -16,8 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public class Add extends HttpServlet {
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    req.setCharacterEncoding("UTF-8");
-    resp.setContentType("text/plain;charset=UTF-8");
     var name = req.getParameter("name");
     var username = req.getParameter("username");
     var password = req.getParameter("password");
@@ -25,7 +23,7 @@ public class Add extends HttpServlet {
     try {
       Utils.checkRole(req, "system_manager");
       AccountService.add(name, username, password, role);
-      resp.getWriter().write("200 ok");
+      Utils.redirect(resp, "/account/add.jsp");
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
     }

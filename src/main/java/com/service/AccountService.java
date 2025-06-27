@@ -4,6 +4,7 @@ import com.util.Password;
 import com.util.exceptions.WebException;
 
 import java.sql.Timestamp;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
@@ -95,7 +96,7 @@ public class AccountService {
     if (lock_time != null) {
       var current = new Timestamp(date.getTime());
       var timeSpan = ChronoUnit.MINUTES.between(
-          lock_time.toInstant(),
+          lock_time.toLocalDateTime(),
           current.toInstant());
       if (timeSpan < 30)
         throw new WebException("还没到时间");
@@ -104,8 +105,8 @@ public class AccountService {
     var last_password_date = account.getLastPasswordChangeDate();
     if (last_password_date != null) {
       var dateSpan = ChronoUnit.DAYS.between(
-          last_password_date.toInstant(),
-          date.toInstant());
+          last_password_date.toLocalDate(),
+          date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
       if (dateSpan < 90)
         throw new WebException("密码太老了");
     }

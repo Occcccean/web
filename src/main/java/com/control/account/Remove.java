@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/account/delete")
 public class Remove extends HttpServlet {
   @Override
-  protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+  protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     var id = Long.parseLong(req.getParameter("id"));
     try {
       Utils.checkRole(req, "system_manager");
