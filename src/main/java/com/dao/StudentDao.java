@@ -18,7 +18,6 @@ public class StudentDao extends BaseDao {
 
     try (Connection conn = getConnection();
         PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
       pstmt.setString(1, student.getStudent_id());
       pstmt.setString(2, student.getName());
       pstmt.setString(3, student.getGender());

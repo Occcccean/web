@@ -4,6 +4,7 @@ import com.util.Password;
 import com.util.exceptions.WebException;
 
 import java.sql.Timestamp;
+import java.time.Instant;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -94,10 +95,9 @@ public class AccountService {
     var lock_time = account.getLockTime();
 
     if (lock_time != null) {
-      var current = new Timestamp(date.getTime());
       var timeSpan = ChronoUnit.MINUTES.between(
-          lock_time.toLocalDateTime(),
-          current.toInstant());
+          lock_time.toInstant(),
+          Instant.now());
       if (timeSpan < 30)
         throw new WebException("还没到时间");
     }
