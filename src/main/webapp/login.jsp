@@ -61,7 +61,7 @@
                 <p class="text-gray-600">请输入账号密码登录</p>
             </div>
 
-            <form id="loginForm" class="space-y-6" method="post" action="/login">
+            <form id="loginForm" class="space-y-6" method="post" action="/myapp/login">
                 <!-- 用户名输入保持不变 -->
                 <div>
                     <label for="username" class="block text-gray-700 font-medium mb-2">用户名</label>
@@ -126,53 +126,5 @@
             <p>© 2025 某大学研究生院 | 技术支持：信息中心</p>
         </div>
     </div>
-
-    <!-- 新增：登录响应处理JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginForm = document.getElementById('loginForm');
-            const loginResult = document.getElementById('loginResult');
-            const resultMessage = document.getElementById('resultMessage');
-
-            loginForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const username = document.getElementById('username').value;
-                const password = document.getElementById('password').value;
-                const role = document.querySelector('input[name="role"]:checked').value;
-
-                // 构建表单数据
-                const formData = new FormData();
-                formData.append('username', username);
-                formData.append('password', password);
-                formData.append('role', role);
-
-                // 发送登录请求（不修改原有表单提交，使用Fetch API监听响应）
-                fetch('/login', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    // 解析Login Servlet返回的结果（格式："student: username"）
-                    if (data.startsWith('student:')) {
-                        // 学生角色登录成功，跳转到student.jsp
-                        sessionStorage.setItem('loginStatus', 'success');
-                        sessionStorage.setItem('role', role);
-                        window.location.href = 'student.jsp';
-                    } else {
-                        // 登录失败或非学生角色
-                        loginResult.classList.remove('hidden');
-                        resultMessage.textContent = data;
-                    }
-                })
-                .catch(error => {
-                    loginResult.classList.remove('hidden');
-                    resultMessage.textContent = '登录请求失败，请重试';
-                    console.error('登录请求错误:', error);
-                });
-            });
-        });
-    </script>
 </body>
 </html>

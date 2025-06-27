@@ -1,4 +1,4 @@
-package com.control.account;
+package com.control.user;
 
 import java.io.IOException;
 
@@ -12,17 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/login")
-public class Login extends HttpServlet {
+@WebServlet("/account/password")
+public class ChangePassword extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    var username = req.getParameter("username");
     var password = req.getParameter("password");
+    var id = Long.parseLong(req.getParameter("id"));
     try {
-      var account = AccountService.login(username, password);
-      Utils.setAccount(req, account);
-      Utils.redirect(resp, "/account/add.jsp");
+      if (!Utils.isRoleMatches(req, "system_manager") && !Utils.isIdMatches(req, id))
+        throw new WebException("权限不足");
+      AccountService.changePassword(id, password);
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
     }
