@@ -11,7 +11,7 @@ CREATE TABLE account (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
-    role VARCHAR(20) CHECK (role IN ('student', 'mentor', 'secretary', 'college_leader', 'student_manager', 'student_leader', 'university_leader', 'system_manager', 'auditor_manager', NULL)),
+    role VARCHAR(20) CHECK (role IN ('student', 'mentor', 'secretary', 'student_leader', 'student_manager', 'student_leader', 'university_leader', 'system_manager', 'auditor_manager', NULL)),
     failed_times INTEGER DEFAULT 0,
     lock_time TIMESTAMP,
     last_password_change_date TIMESTAMP
