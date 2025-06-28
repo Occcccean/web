@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
   static protected String getPath(String role) {
     return switch (role) {
       case "student" -> "/student.jsp";
-      case "system_manager" -> "/edit.jsp";
+      case "system_manager" -> "/account/edit.jsp";
       case "mentor" -> "/mentor.jsp";
       case "secretary", "college_leader" -> "/secretary.jsp";
       case "auditor_manager" -> "/auditor_manager.jsp";

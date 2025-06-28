@@ -184,7 +184,7 @@
                 <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">
                   <i class="fa fa-edit"></i>
                 </a>
-                <a href="#" class="text-red-600 hover:text-red-900">
+                <a href="/myapp/account/delete?id=<%= account.getId() %>" class="text-red-600 hover:text-red-900">
                   <i class="fa fa-trash"></i>
                 </a>
               </td>

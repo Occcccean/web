@@ -19,7 +19,7 @@ public class Account implements Filter {
     try {
       Utils.checkRole((HttpServletRequest) request, "system_manager");
       chain.doFilter(request, response);
-      Utils.redirect((HttpServletResponse) response, "/account/add.jsp");
+      Utils.redirect((HttpServletResponse) response, "/account/edit.jsp");
     } catch (WebException e) {
       response.getWriter().write("权限不足");
     }
