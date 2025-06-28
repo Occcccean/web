@@ -1,5 +1,4 @@
 <%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
-<%@import
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -98,19 +97,22 @@
 
                 <!-- 密码修改表单 -->
                 <div class="animate-slide-up" style="animation-delay: 0.2s">
-                    <form id="changePasswordForm" method="post" action="change_password_action.jsp">
+                    <form id="changePasswordForm" method="post" action="${pageContext.request.contextPath}/account/password">
+                        <!-- 从Session获取用户ID并作为隐藏字段 -->
+                        <input type="hidden" id="userId" name="id" value="${sessionScope.account.id}">
+
                         <div class="space-y-6">
                             <!-- 原密码 -->
                             <div>
                                 <label for="oldPassword" class="form-label">原密码</label>
-                                <input type="password" id="oldPassword" name="oldPassword" class="form-input" placeholder="请输入原密码">
+                                <input type="password" id="oldPassword" class="form-input" placeholder="请输入原密码">
                                 <div id="oldPasswordError" class="form-error hidden"></div>
                             </div>
 
                             <!-- 新密码 -->
                             <div>
                                 <label for="newPassword" class="form-label">新密码</label>
-                                <input type="password" id="newPassword" name="newPassword" class="form-input" placeholder="请输入新密码">
+                                <input type="password" id="newPassword" class="form-input" placeholder="请输入新密码">
                                 <div id="newPasswordError" class="form-error hidden"></div>
                                 <div class="mt-2 text-xs text-gray-500">
                                     <i class="fa fa-info-circle mr-1"></i>密码长度至少8位，包含字母和数字
@@ -120,13 +122,13 @@
                             <!-- 确认新密码 -->
                             <div>
                                 <label for="confirmPassword" class="form-label">确认新密码</label>
-                                <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="请再次输入新密码">
+                                <input type="password" id="confirmPassword" class="form-input" placeholder="请再次输入新密码">
                                 <div id="confirmPasswordError" class="form-error hidden"></div>
                             </div>
 
                             <!-- 提交按钮 -->
                             <div class="pt-4">
-                                <button type="submit" id="submitBtn" class="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center justify-center">
+                                <button type="button" id="submitBtn" class="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors flex items-center justify-center">
                                     <i class="fa fa-check-circle mr-2"></i>
                                     确认修改
                                 </button>
@@ -174,8 +176,7 @@
 
     <script>
         // 表单验证
-        document.getElementById('changePasswordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        document.getElementById('submitBtn').addEventListener('click', function() {
             let isValid = true;
 
             // 重置所有错误提示
@@ -222,13 +223,38 @@
 
             // 如果验证通过，提交表单
             if (isValid) {
-                // 模拟表单提交，实际应用中应提交到后端处理
-                // this.submit();
+                // 将新密码赋值给表单中的password字段
+                document.getElementById('changePasswordForm').password = newPassword;
 
-                // 模拟成功响应
-                setTimeout(() => {
-                    document.getElementById('successModal').classList.remove('hidden');
-                }, 500);
+                // 使用fetch API提交表单数据
+                const formData = new FormData();
+                formData.append('id', document.getElementById('userId').value);
+                formData.append('password', newPassword);
+
+                fetch('${pageContext.request.contextPath}/account/password', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.text();
+                    } else {
+                        throw new Error('服务器错误');
+                    }
+                })
+                .then(data => {
+                    if (data) {
+                        // 服务器返回错误信息
+                        showError(data);
+                    } else {
+                        // 成功
+                        document.getElementById('successModal').classList.remove('hidden');
+                    }
+                })
+                .catch(error => {
+                    showError('网络错误，请稍后重试');
+                    console.error('Error:', error);
+                });
             }
         });
 
@@ -244,7 +270,7 @@
             document.getElementById('errorModal').classList.add('hidden');
         });
 
-        // 示例：显示错误提示
+        // 显示错误提示
         function showError(message) {
             document.getElementById('errorMessage').textContent = message;
             document.getElementById('errorModal').classList.remove('hidden');
