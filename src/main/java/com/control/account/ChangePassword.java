@@ -3,7 +3,6 @@ package com.control.account;
 import java.io.IOException;
 
 import com.service.AccountService;
-import com.util.Utils;
 import com.util.exceptions.WebException;
 
 import jakarta.servlet.ServletException;
@@ -20,8 +19,6 @@ public class ChangePassword extends HttpServlet {
     var password = req.getParameter("password");
     var id = Long.parseLong(req.getParameter("id"));
     try {
-      if (!Utils.isRoleMatches(req, "system_manager"))
-        throw new WebException("权限不足");
       AccountService.changePassword(id, password);
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());

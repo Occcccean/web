@@ -21,9 +21,7 @@ public class Add extends HttpServlet {
     var password = req.getParameter("password");
     var role = req.getParameter("role");
     try {
-      Utils.checkRole(req, "system_manager");
       AccountService.add(name, username, password, role);
-      Utils.redirect(resp, "/account/add.jsp");
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
     }

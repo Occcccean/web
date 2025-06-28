@@ -1,7 +1,6 @@
 package com.control.account;
 
 import com.service.AccountService;
-import com.util.Utils;
 import com.util.exceptions.WebException;
 
 import java.io.IOException;
@@ -18,7 +17,6 @@ public class Remove extends HttpServlet {
   protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     var id = Long.parseLong(req.getParameter("id"));
     try {
-      Utils.checkRole(req, "system_manager");
       AccountService.delete(id);
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
