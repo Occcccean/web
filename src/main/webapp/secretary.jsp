@@ -131,9 +131,9 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700 font-medium mb-1">联系方式</label>
+                                    <label class="block text-gray-700 font-medium mb-1">用户名</label>
                                     <div class="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">
-                                        <span id="secretaryContact">13800138001</span>
+                                      <span id="secretaryContact">${account.username}</span>
                                     </div>
                                 </div>
                             </div>
