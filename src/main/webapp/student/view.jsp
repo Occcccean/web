@@ -1,5 +1,5 @@
 <%@page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
-<%@page import = "com.dao.StudentDao" %>
+<%@page import = "com.dao.StudentDao, com.dao.MentorDao, com.model.Student" %>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -140,7 +140,8 @@
                             </div>
                             <div>
                                 <label class="field-label block mb-1">导师</label>
-                                <div class="field-value student-field" >${student.mentor}</div>
+                                <% pageContext.setAttribute("mentor", new MentorDao().getById(((Student) request.getAttribute("student")).getId())); %>
+                                <div class="field-value student-field" >${mentor.name}</div>
                             </div>
                             <div>
                                 <label class="field-label block mb-1">入学日期</label>
