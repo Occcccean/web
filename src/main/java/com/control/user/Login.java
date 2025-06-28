@@ -35,7 +35,9 @@ public class Login extends HttpServlet {
       case "mentor" -> "/mentor.jsp";
       case "secretary", "college_leader" -> "/secretary.jsp";
       case "auditor_manager" -> "/auditor_manager.jsp";
-      case "student_leader", "student_manager", "university_leader" -> "/university_select.jsp";
+      case "student_leader"-> "/student_leader.jsp";
+      case "student_manager"-> "/student_manager.jsp";
+      case "university_leader"-> "/university_leader.jsp";
       default -> "/login.jsp";
     };
   }

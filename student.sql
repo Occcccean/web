@@ -93,6 +93,24 @@ CREATE TABLE university_leader (
     FOREIGN KEY (account_id) REFERENCES account(id) ON DELETE SET NULL
 );
 
+-- 操作日志表
+CREATE TABLE operation_log (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    user_id BIGINT NOT NULL COMMENT '用户ID',
+    username VARCHAR(50) NOT NULL COMMENT '用户名',
+    operation_type VARCHAR(50) NOT NULL COMMENT '操作类型',
+    operation_content TEXT COMMENT '操作内容详情',
+    ip_address VARCHAR(50) COMMENT 'IP地址',
+    user_agent VARCHAR(255) COMMENT '用户代理',
+    operation_time DATETIME NOT NULL COMMENT '操作时间',
+    status VARCHAR(20) DEFAULT 'SUCCESS' COMMENT '操作状态'
+);
+
+-- 添加索引以提高查询性能
+CREATE INDEX idx_operation_time ON operation_log (operation_time);
+CREATE INDEX idx_user_id ON operation_log (user_id);
+CREATE INDEX idx_operation_type ON operation_log (operation_type);
+
 
 CREATE INDEX idx_account_username ON account(username);
 CREATE INDEX idx_student_college ON student(college);
