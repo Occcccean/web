@@ -6,7 +6,7 @@ import com.model.Mentor;
 
 public class MentorDao extends BaseDao {
   public boolean add(Mentor mentor) {
-    var sql = "Insert into mentor values(?,?,?)";
+    var sql = "Insert into mentor(name, college, account_id) values(?,?,?)";
     try {
       try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
         statement.setString(1, mentor.getName());
@@ -42,15 +42,17 @@ public class MentorDao extends BaseDao {
 
   public Mentor getByAccountId(long account) {
     var mentor = new Mentor();
-    var sql = "Select name, college, account_id from mentor where account_id = ?";
+    var sql = "Select * from mentor where account_id = ?";
     try {
       try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
         statement.setLong(1, account);
         var result = statement.executeQuery();
-        mentor.setAccount_id(account);
-        mentor.setName(result.getString("name"));
-        mentor.setCollege(result.getString("college"));
-        mentor.setId(result.getLong("id"));
+        if (result.next()) {
+          mentor.setAccount_id(account);
+          mentor.setName(result.getString("name"));
+          mentor.setCollege(result.getString("college"));
+          mentor.setId(result.getLong("id"));
+        }
       }
     } catch (Exception e) {
       e.printStackTrace();

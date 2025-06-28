@@ -17,7 +17,7 @@ public class AccountService {
   static AccountDao dao = new AccountDao();
 
   public static void add(String name, String username, String password, String role) throws WebException {
-    var passwd = new Password(username);
+    var passwd = new Password(password);
     if (dao.getByUsername(username) != null)
       throw new WebException("已经存在的用户名");
 

@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html;charset=UTF-8" language="java"%>
 <html lang="zh-CN">
 <head>
     <!-- 原有HTML结构保持不变 -->
