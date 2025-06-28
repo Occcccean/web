@@ -21,7 +21,6 @@ public class Login extends HttpServlet {
     var password = req.getParameter("password");
     try {
       var account = AccountService.login(username, password);
-      var role=account.getRole();
       Utils.setAccount(req, account);
       Utils.redirect(resp, getPath(account.getRole()));
     } catch (WebException e) {
@@ -29,16 +28,16 @@ public class Login extends HttpServlet {
     }
   }
 
-  static protected String getPath(String role){
-      return switch (role) {
-          case "student" -> "/student.jsp";
-          case "system_manager" -> "/edit.jsp";
-          case "mentor" -> "/mentor.jsp";
-          case "secretary", "college_leader" -> "/secretary.jsp";
-          case "auditor_manager" -> "/auditor_manager.jsp";
-          case "student_leader", "student_manager", "university_leader" -> "/university_select.jsp";
-          default -> "/login.jsp";
-      };
+  static protected String getPath(String role) {
+    return switch (role) {
+      case "student" -> "/student.jsp";
+      case "system_manager" -> "/edit.jsp";
+      case "mentor" -> "/mentor.jsp";
+      case "secretary", "college_leader" -> "/secretary.jsp";
+      case "auditor_manager" -> "/auditor_manager.jsp";
+      case "student_leader", "student_manager", "university_leader" -> "/university_select.jsp";
+      default -> "/login.jsp";
+    };
   }
 
 }
