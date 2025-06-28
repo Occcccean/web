@@ -1,4 +1,6 @@
-<%@page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ page import = "com.dao.StudentDao"%>
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -44,7 +46,7 @@
     </header>
 
     <%
-      pageContext.setAttribute("students", new StudentDao.getAll())
+      pageContext.setAttribute("students", new StudentDao().getAll());
     %>
 
     <div class="container mx-auto px-4 py-8 flex flex-col lg:flex-row gap-6">
@@ -58,11 +60,11 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <div>
                         <p class="text-gray-600">姓名</p>
-                        <p class="font-medium" id="roleName">张院长</p>
+                        <p class="font-medium" id="roleName">${account.username}</p>
                     </div>
                     <div>
                         <p class="text-gray-600">角色</p>
-                        <p class="font-medium" id="roleType">研究生院领导</p>
+                        <p class="font-medium" id="roleType">${account.role}</p>
                     </div>
                     <div>
                         <p class="text-gray-600">所属部门</p>
@@ -70,7 +72,7 @@
                     </div>
                     <div>
                         <p class="text-gray-600">最后登录</p>
-                        <p class="font-medium">2025-06-27 08:30</p>
+                        <p class="font-medium">${account.lastPasswordChangeDate}</p>
                     </div>
                 </div>
             </div>
@@ -103,24 +105,24 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">学院</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">专业</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">入学年份</th>
-                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500">状态</th>
                                 <th class="px-6 py-3 text-right text-xs font-medium text-gray-500">操作</th>
                             </tr>
                         </thead>
                         <tbody>
+                          <c:forEach var="student" items="${students}">
                             <tr class="table-row">
-                                <td class="px-6 py-4 text-sm">20230002</td>
-                                <td class="px-6 py-4 text-sm">李四</td>
-                                <td class="px-6 py-4 text-sm">数学学院</td>
-                                <td class="px-6 py-4 text-sm">应用数学</td>
-                                <td class="px-6 py-4 text-sm">2023</td>
-                                <td class="px-6 py-4 text-sm"><span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs">在读</span></td>
+                              <td class="px-6 py-4 text-sm">${student.student_id}</td>
+                              <td class="px-6 py-4 text-sm">${student.name}</td>
+                              <td class="px-6 py-4 text-sm">${student.college}</td>
+                              <td class="px-6 py-4 text-sm">${student.major}</td>
+                              <td class="px-6 py-4 text-sm">${student.entrance_date}</td>
                                 <td class="px-6 py-4 text-sm text-right">
                                     <button class="text-primary hover:text-primary/80 mr-3">查看</button>
                                     <button id="editBtn2" class="text-primary hover:text-primary/80 mr-3 hidden">编辑</button>
                                     <button id="deleteBtn2" class="text-red-500 hover:text-red-600 hidden">删除</button>
                                 </td>
                             </tr>
+                          </c:forEach>
                         </tbody>
                     </table>
                 </div>
