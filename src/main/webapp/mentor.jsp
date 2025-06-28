@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <%@ page import = "com.util.Utils, com.dao.MentorDao, com.dao.StudentDao" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@ taglib uri="jakarta.tags.core" prefix="c" %>
 
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -116,15 +116,15 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <label class="block text-gray-700 font-medium mb-1">账号ID</label>
-                                    <div class="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">
-                                      <span id="mentorAccountId">${mentor.account_id}</span>
-                                    </div>
-                                </div>
-                                <div>
                                     <label class="block text-gray-700 font-medium mb-1">用户名</label>
                                     <div class="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">
                                       <span id="mentorContact">${account.username}</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-medium mb-1">学生数量</label>
+                                    <div class="text-gray-800 bg-gray-50 p-3 rounded-lg border border-gray-200">
+                                      <span id="mentorAccountId">${students.size()}</span>
                                     </div>
                                 </div>
                             </div>
@@ -144,34 +144,34 @@
                     </div>
 
                     <!-- 学生列表卡片 -->
-                    <c:if test="${}">
-                    <div id="studentsList" class="space-y-4 hidden">
-                        <!-- 学生项1 -->
-                        <c:forEach var="student" items="students">
-                          <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                              <div class="flex flex-col md:flex-row md:items-center justify-between">
-                                  <div class="flex items-center mb-3 md:mb-0">
-                                      <img src="https://picsum.photos/100/100?random=1" alt="学生头像" class="w-12 h-12 rounded-full object-cover mr-3">
-                                      <div>
-                                        <h4 class="font-medium text-gray-800" id="student1Name">${student.name}</h4>
-                                        <p class="text-gray-600" id="student1Info">${student.college} | ${student.major}</p>
-                                      </div>
-                                  </div>
-                                  <button class="btn-secondary view-student-btn" data-student-id="1">
-                                      <i class="fa fa-info-circle mr-1"></i>查看详情
-                                  </button>
-                              </div>
-                          </div>
-                        <c:forEach>
-                    </div>
+                    <c:if test="${not empty students}">
+                      <div id="studentsList" class="space-y-4">
+                          <!-- 学生项1 -->
+                          <c:forEach var="student" varStatus="status" items="${students}">
+                            <div class="border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
+                                <div class="flex flex-col md:flex-row md:items-center justify-between">
+                                    <div class="flex items-center mb-3 md:mb-0">
+                                      <img src="https://picsum.photos/${status.index + 200}/100" alt="学生头像" class="w-12 h-12 rounded-full object-cover mr-3">
+                                        <div>
+                                          <h4 class="font-medium text-gray-800" id="student1Name">${student.name}</h4>
+                                          <p class="text-gray-600" id="student1Info">${student.college} | ${student.major}</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn-secondary view-student-btn" data-student-id="1">
+                                        <i class="fa fa-info-circle mr-1"></i>查看详情
+                                    </button>
+                                </div>
+                            </div>
+                          </c:forEach>
+                      </div>
                     </c:if>
-                    <c:else>
-                    <!-- 暂无学生提示 -->
-                    <div id="noStudentsTip" class="text-center py-8 text-gray-500 hidden">
-                        <i class="fa fa-info-circle text-3xl mb-3 text-primary/30"></i>
-                        <p>您目前没有指导的学生</p>
-                    </div>
-                    </c:else>
+                    <c:if test="${empty students}">
+                      <!-- 暂无学生提示 -->
+                      <div id="noStudentsTip" class="text-center py-8 text-gray-500 hidden">
+                          <i class="fa fa-info-circle text-3xl mb-3 text-primary/30"></i>
+                          <p>您目前没有指导的学生</p>
+                      </div>
+                    </c:if>
                 </div>
             </div>
         </div>
