@@ -1,9 +1,8 @@
-package com.control.user;
+package com.control.account;
 
 import java.io.IOException;
 
 import com.service.AccountService;
-import com.util.Password;
 import com.util.Utils;
 import com.util.exceptions.WebException;
 
@@ -13,18 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/password")
+@WebServlet("/account/password")
 public class ChangePassword extends HttpServlet {
 
   @Override
   protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    var oldpasswd = req.getParameter("old");
-    var newpasswd = req.getParameter("new");
+    var password = req.getParameter("password");
+    var id = Long.parseLong(req.getParameter("id"));
     try {
-      if (!new Password(oldpasswd).verify(Utils.getAccount(req).getPassword()))
-        throw new WebException("密码错误");
-
-      AccountService.changePassword(Utils.getAccount(req).getId(), newpasswd);
+      if (!Utils.isRoleMatches(req, "system_manager"))
+        throw new WebException("权限不足");
+      AccountService.changePassword(id, password);
     } catch (WebException e) {
       resp.getWriter().write(e.getMessage());
     }
