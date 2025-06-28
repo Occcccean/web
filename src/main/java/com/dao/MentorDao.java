@@ -28,10 +28,12 @@ public class MentorDao extends BaseDao {
       try (var connection = getConnection(); var statement = connection.prepareStatement(sql)) {
         statement.setLong(1, id);
         var result = statement.executeQuery();
-        mentor.setId(id);
-        mentor.setName(result.getString("name"));
-        mentor.setCollege(result.getString("college"));
-        mentor.setAccount_id(result.getLong("account_id"));
+        if (result.next()) {
+          mentor.setId(id);
+          mentor.setName(result.getString("name"));
+          mentor.setCollege(result.getString("college"));
+          mentor.setAccount_id(result.getLong("account_id"));
+        }
       }
     } catch (Exception e) {
       e.printStackTrace();
